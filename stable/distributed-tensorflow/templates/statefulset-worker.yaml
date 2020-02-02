@@ -2,7 +2,7 @@
 {{- $batchsize := .Values.hyperparams.batchsize -}}
 {{- $trainsteps := .Values.hyperparams.trainsteps -}}
 
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ .Release.Name }}-worker
@@ -84,6 +84,8 @@ spec:
         resources:
           limits:
             nvidia.com/gpu: {{- .Values.worker.gpuCount }}
+            memory: 256Mi
           request:
             nvidia.com/gpu: {{- .Values.worker.gpuCount }}
+            memory: 128Mi
 {{- end }}
